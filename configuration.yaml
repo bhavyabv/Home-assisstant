@@ -1,0 +1,27 @@
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+mqtt:
+  sensor:
+    - name: "NAK Temp"
+      state_topic: "home/bhavya-2025/sensor"
+      unit_of_measurement: "°C"
+      value_template: "{{ value_json.temperature }}"
+    - name: "NAK Humidity"
+      state_topic: "home/bhavya-2025/sensor"
+      unit_of_measurement: "%"
+      value_template: "{{ value_json.humidity }}"
+  binary_sensor:
+    - name: "NAK Light"
+      state_topic: "home/bhavya-2025/sensor"
+      value_template: "{{ value_json.light }}"
+      payload_on: 1
+      payload_off: 0
